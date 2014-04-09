@@ -42,6 +42,4 @@
 
   Bullet.SPEED = 3;
 
-
-
 })(this);

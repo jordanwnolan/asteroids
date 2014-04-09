@@ -43,7 +43,7 @@
 
   Game.prototype.step = function(){
     if (this.asteroids.length === 0){
-      alert("You Win!");
+      if( !alert('You Win!') ){window.location.reload();}
     };
 
     this.move();
@@ -62,8 +62,7 @@
       // console.log("this.asteroids[i].pos: " + this.asteroids[i].pos);
       // console.log("this.ship.pos: " + this.ship.pos);
       if (this.asteroids[i].isCollidedWith(this.ship)){
-        alert('Game over!');
-        // this.stop(stepInterval);
+        if( !alert('Game Over!') ){window.location.reload();}
       };
     };
   };

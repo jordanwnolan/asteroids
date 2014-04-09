@@ -11,6 +11,8 @@
 
   };
 
+  Asteroid.inherits(Asteroids.MovingObject)
+
   Asteroid.randomAsteroid = function(){
 
     var randomX = Math.random() * Asteroids.Game.DIM_X;
@@ -33,7 +35,5 @@
 
     return new Asteroid([randomX, randomY], randomVec());
   };
-
-  Asteroid.inherits(Asteroids.MovingObject);
 
 })(this);
