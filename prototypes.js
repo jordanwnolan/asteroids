@@ -15,7 +15,9 @@ Function.prototype.inherits = function(SuperClass){
 
 //testing area
 
-function MovingObject() {};
+function MovingObject() {
+  this.name = 'MovingObject';
+};
 
 MovingObject.prototype.move = function(){
 
@@ -23,7 +25,10 @@ MovingObject.prototype.move = function(){
 
 };
 
-function Ship () {};
+function Ship () {
+  MovingObject.call(this);
+};
+
 Ship.inherits(MovingObject);
 
 function Asteroid () {};
@@ -31,3 +36,4 @@ Asteroid.inherits(MovingObject);
 
 ship = new Ship();
 ship.move();
+console.log(ship.name);

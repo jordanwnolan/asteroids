@@ -26,6 +26,7 @@
   </style>
 
   <script type="text/javascript" src="inherit.js"></script>
+  <script type="text/javascript" src="keymaster.js"></script>
   <script type="text/javascript" src="movingObject.js"></script>
   <script type="text/javascript" src="asteroid.js"></script>
   <script type="text/javascript" src="bullet.js"></script>
@@ -42,6 +43,8 @@
 
   <script type="text/javascript">
     var canv = document.getElementById("asteroidCanvas");
-    new Asteroids.Game(canv.getContext("2d")).start();
+    game = new Asteroids.Game(canv.getContext("2d"));
+    console.log(game.ship);
+    game.start(20);
   </script>
 </body>
