@@ -4,6 +4,7 @@
   var Game = Asteroids.Game = function(ctx) {
     this.ctx = ctx;
     this.asteroids = [];
+    this.bullets = [];
     this.ship = new Asteroids.Ship(Game.DIM_X, Game.DIM_Y);
   };
 
@@ -21,17 +22,30 @@
     for (var i = 0; i < this.asteroids.length; i++) {
       this.asteroids[i].draw(this.ctx);
     };
+    for (var i = 0; i < this.bullets.length; i++) {
+      this.bullets[i].draw(this.ctx);
+    }
     this.ship.draw(this.ctx);
   };
 
   Game.prototype.move = function(){
+
     for (var i = 0; i < this.asteroids.length; i++) {
       this.asteroids[i].move();
     };
+
+    for (var i = 0; i < this.bullets.length; i++) {
+      this.bullets[i].move();
+    };
+
     this.ship.move();
   };
 
   Game.prototype.step = function(){
+    if (this.asteroids.length === 0){
+      alert("You Win!");
+    };
+
     this.move();
     this.draw();
     this.checkCollisions();
@@ -48,7 +62,7 @@
       // console.log("this.asteroids[i].pos: " + this.asteroids[i].pos);
       // console.log("this.ship.pos: " + this.ship.pos);
       if (this.asteroids[i].isCollidedWith(this.ship)){
-        // alert('Game over!');
+        alert('Game over!');
         // this.stop(stepInterval);
       };
     };
@@ -58,13 +72,38 @@
     clearInterval(stepInterval);
   };
 
+  Game.prototype.fireBullet = function(){
 
+    this.bullets.push(this.ship.fireBullet(this));
+
+  }
 
   Game.prototype.bindKeyHandlers = function() {
-    key("a", function(){ this.ship.power([-1, 0]) });
-    key("d", function(){ this.ship.power([1, 0]) });
-    key("w", function(){ this.ship.power([0, -1]) });
-    key("s", function(){ this.ship.power([0, 1]) });
+    var that = this;
+
+    key("a", function(){ that.ship.power([-1, 0]) });
+    key("d", function(){ that.ship.power([1, 0]) });
+    key("w", function(){ that.ship.power([0, -1]) });
+    key("s", function(){ that.ship.power([0, 1]) });
+    key("space", function(){ that.fireBullet(); });
+  }
+
+  Game.prototype.removeAsteroid = function(index){
+    console.log("Asteroid 'removed'~");
+
+    console.log(this.asteroids.splice(index, 1))
+      this.asteroids.splice(index, 1);
+  }
+
+  Game.prototype.removeBullet = function(bullet){
+    console.log("Bullet 'removed'~");
+
+    var bulIndex = this.bullets.indexOf(bullet);
+
+    if (bulIndex > -1){
+      this.bullets.splice(bulIndex, 1);
+    };
+
   }
 
 })(this);

@@ -21,6 +21,7 @@
     canvas {
       display: block;
       margin: auto;
+      border: 5px solid white;
     }
 
   </style>
@@ -44,7 +45,6 @@
   <script type="text/javascript">
     var canv = document.getElementById("asteroidCanvas");
     game = new Asteroids.Game(canv.getContext("2d"));
-    console.log(game.ship);
-    game.start(20);
+    game.start(15);
   </script>
 </body>
